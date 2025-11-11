@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import AnimatedBot from './AnimatedBot';
 
 interface Message {
   type: 'user' | 'bot';
@@ -91,62 +92,12 @@ export default function Chatbot() {
       {/* Chatbot Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <div className="relative">
-          {/* Chatbot Character */}
+          {/* Chatbot Character con SVG animado */}
           <div
             onClick={toggleChat}
-            className="chatbot-container cursor-pointer relative"
-            style={{
-              width: '150px',
-              height: '210px',
-              animation: 'slideUp 2s ease-out forwards, float 4s ease-in-out infinite 2s',
-            }}
+            className="cursor-pointer"
           >
-            <div className="chatbot-body relative w-full h-full bg-transparent">
-              {/* Character Background */}
-              <div
-                className="chatbot-background absolute top-0 left-0 w-full h-full bg-contain bg-no-repeat bg-center z-10"
-                style={{
-                  backgroundImage: "url('/images/bot-character.png')",
-                }}
-              >
-                {/* Placeholder character - puedes reemplazar con tu imagen */}
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="w-24 h-24 bg-linear-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center shadow-2xl">
-                    <span className="text-4xl">🤖</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Eyes */}
-              <div
-                className="eyes-container absolute z-20 flex"
-                style={{
-                  top: '36%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  gap: '18%',
-                }}
-              >
-                <div id="leftEye" className="eye left"></div>
-                <div id="rightEye" className="eye right"></div>
-              </div>
-
-              {/* Magic Base */}
-              <div
-                className="magic-base absolute z-10"
-                style={{
-                  bottom: '-20px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '120px',
-                  height: '8px',
-                }}
-              >
-                <div className="magic-particle particle-1"></div>
-                <div className="magic-particle particle-2"></div>
-                <div className="magic-particle particle-3"></div>
-              </div>
-            </div>
+            <AnimatedBot />
           </div>
 
           {/* Chat Window */}
@@ -161,8 +112,10 @@ export default function Chatbot() {
               {/* Chat Header */}
               <div className="bg-linear-to-r from-red-600 to-red-700 p-4 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <span className="text-2xl">🤖</span>
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden">
+                    <div className="scale-[0.25] mt-1">
+                      <AnimatedBot />
+                    </div>
                   </div>
                   <div>
                     <h3 className="text-white font-bold">Asistente de Seguridad</h3>
@@ -249,26 +202,6 @@ export default function Chatbot() {
 
       {/* Styles */}
       <style>{`
-        @keyframes slideUp {
-          from {
-            transform: translateY(100px);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
         @keyframes slideInUp {
           from {
             transform: translateY(20px);
@@ -276,61 +209,6 @@ export default function Chatbot() {
           }
           to {
             transform: translateY(0);
-            opacity: 1;
-          }
-        }
-
-        .eye {
-          width: 8px;
-          height: 8px;
-          background: #1f2937;
-          border-radius: 50%;
-          position: relative;
-        }
-
-        .eye::after {
-          content: '';
-          position: absolute;
-          width: 3px;
-          height: 3px;
-          background: white;
-          border-radius: 50%;
-          top: 1px;
-          left: 1px;
-        }
-
-        .magic-particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: radial-gradient(circle, #ef4444, #dc2626);
-          border-radius: 50%;
-          opacity: 0;
-          animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .particle-1 {
-          left: 20%;
-          animation-delay: 0s;
-        }
-
-        .particle-2 {
-          left: 50%;
-          animation-delay: 0.3s;
-        }
-
-        .particle-3 {
-          left: 80%;
-          animation-delay: 0.6s;
-        }
-
-        @keyframes sparkle {
-          0%, 100% {
-            transform: translateY(0) scale(0);
-            opacity: 0;
-          }
-          50% {
-            transform: translateY(-15px) scale(1);
             opacity: 1;
           }
         }
