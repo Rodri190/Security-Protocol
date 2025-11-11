@@ -5,7 +5,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  // 👇 Esta línea le dice a Next dónde está tu código fuente
   srcDir: 'src',
 };
 
