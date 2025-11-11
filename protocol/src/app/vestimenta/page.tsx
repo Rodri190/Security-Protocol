@@ -19,6 +19,8 @@ export default function VestimentaPage() {
             </p>
             <p className="text-gray-600 leading-relaxed">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantiumentore veritatis et 
+            </p>
+          </div>
         </section>
 
         <section id="equipos" className="mb-12">
