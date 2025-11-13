@@ -19,22 +19,27 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                  Inicio
+                  INICIO
                 </Link>
               </li>
               <li>
                 <Link href="/vestimenta" className="text-gray-400 hover:text-white transition-colors">
-                  Vestimenta
+                  EQUIPOS DE PROTECCION SEGUN ZONAS DE TRABAJO
                 </Link>
               </li>
               <li>
                 <Link href="/statistics/total" className="text-gray-400 hover:text-white transition-colors">
-                  Estadísticas
+                  ESTADISTICAS
                 </Link>
               </li>
               <li>
                 <Link href="/analysis/area" className="text-gray-400 hover:text-white transition-colors">
-                  Análisis
+                  ANALISIS
+                </Link>
+              </li>
+              <li>
+                <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
+                  MARCO NORMATIVO BOLIVIANO
                 </Link>
               </li>
             </ul>
@@ -42,21 +47,16 @@ export default function Footer() {
 
           {/* Columna 3: Normas */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Normas de Seguridad</h3>
+            <h3 className="text-xl font-bold mb-4">Marco Normativo</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
-                  Golpes de Calor
+                <Link href="/norms/general-risks" className="text-gray-400 hover:text-white transition-colors">
+                  Normas para Riesgos Generales
                 </Link>
               </li>
               <li>
-                <Link href="/norms/falls" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Caídas
-                </Link>
-              </li>
-              <li>
-                <Link href="/norms/cuts" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Cortes
+                <Link href="/norms/specific-zones" className="text-gray-400 hover:text-white transition-colors">
+                  Normas Específicas por Zonas
                 </Link>
               </li>
             </ul>
