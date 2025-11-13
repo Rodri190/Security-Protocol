@@ -26,7 +26,8 @@ export const mainNavigation: (NavItem | NavMenu)[] = [
   {
     label: 'MARCO NORMATIVO BOLIVIANO',
     items: [
-      { label: 'Cortes', href: '/norms/cuts' },
+      { label: 'Normas para Riesgos Generales', href: '/norms/general-risks' },
+      { label: 'Normas Específicas por Zonas', href: '/norms/specific-zones' },
     ],
   },
 ];
