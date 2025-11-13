@@ -19,22 +19,27 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                  Inicio
+                  INICIO
                 </Link>
               </li>
               <li>
                 <Link href="/vestimenta" className="text-gray-400 hover:text-white transition-colors">
-                  Vestimenta
+                  EQUIPOS DE PROTECCION SEGUN ZONAS DE TRABAJO
                 </Link>
               </li>
               <li>
                 <Link href="/statistics/total" className="text-gray-400 hover:text-white transition-colors">
-                  Estadísticas
+                  ESTADISTICAS
                 </Link>
               </li>
               <li>
                 <Link href="/analysis/area" className="text-gray-400 hover:text-white transition-colors">
-                  Análisis
+                  ANALISIS
+                </Link>
+              </li>
+              <li>
+                <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
+                  MARCO NORMATIVO BOLIVIANO
                 </Link>
               </li>
             </ul>
@@ -46,17 +51,17 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
-                  Golpes de Calor
+                  ISO
                 </Link>
               </li>
               <li>
                 <Link href="/norms/falls" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Caídas
+                  OHSAS
                 </Link>
               </li>
               <li>
                 <Link href="/norms/cuts" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Cortes
+                  NFPA
                 </Link>
               </li>
             </ul>
