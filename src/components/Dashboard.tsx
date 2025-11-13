@@ -70,24 +70,23 @@ export default function Dashboard() {
                 Monitoreo constante de incidentes y accidentes en todas las áreas de trabajo.
                 Datos actualizados para toma de decisiones informadas.
               </p>
-              <Link href="/statistics/total" className="text-red-600 hover:text-red-700 font-semibold">
+              <Link href="/analysis/type" className="text-red-600 hover:text-red-700 font-semibold">
                 Ver estadísticas →
               </Link>
             </div>
 
-            {/* Feature 2 */}
+            {/* Feature 2*/}
             <div className="p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
               <div className="mb-4 bg-blue-100 w-16 h-16 rounded-lg flex items-center justify-center">
                 <svg className="w-9 h-9 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Análisis Detallado</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Marco normativo Boliviano</h3>
               <p className="text-gray-600 mb-4">
-                Análisis profundo por área, turno y tipo de accidente. Identificación de
-                patrones y áreas críticas que requieren atención inmediata.
+                Análisis detallado del marco normativo boliviano. Identificación de leyes clave, principios fundamentales y áreas que requieren actualización o mayor cumplimiento para fortalecer la gestión institucional y social.
               </p>
-              <Link href="/analysis/area" className="text-red-600 hover:text-red-700 font-semibold">
+              <Link href="/norms" className="text-red-600 hover:text-red-700 font-semibold">
                 Ver análisis →
               </Link>
             </div>
@@ -130,7 +129,7 @@ export default function Dashboard() {
               Ver Normas de Seguridad
             </Link>
             <Link
-              href="/statistics/total"
+              href="/analysis/type"
               className="bg-yellow-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-800 transition-colors border-2 border-white"
             >
               Consultar Estadísticas
