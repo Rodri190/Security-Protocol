@@ -47,21 +47,16 @@ export default function Footer() {
 
           {/* Columna 3: Normas */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Normas de Seguridad</h3>
+            <h3 className="text-xl font-bold mb-4">Marco Normativo</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
-                  ISO
+                <Link href="/norms/general-risks" className="text-gray-400 hover:text-white transition-colors">
+                  Normas para Riesgos Generales
                 </Link>
               </li>
               <li>
-                <Link href="/norms/falls" className="text-gray-400 hover:text-white transition-colors">
-                  OHSAS
-                </Link>
-              </li>
-              <li>
-                <Link href="/norms/cuts" className="text-gray-400 hover:text-white transition-colors">
-                  NFPA
+                <Link href="/norms/specific-zones" className="text-gray-400 hover:text-white transition-colors">
+                  Normas Específicas por Zonas
                 </Link>
               </li>
             </ul>
