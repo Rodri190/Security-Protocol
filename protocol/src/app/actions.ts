@@ -2,7 +2,6 @@
 
 // Server Actions de ejemplo
 export async function getAccidentStatistics() {
-  // Lógica para obtener estadísticas de accidentes
   return {
     total: 0,
     byWeek: [],
