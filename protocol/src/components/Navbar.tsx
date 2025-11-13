@@ -3,12 +3,26 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { mainNavigation } from '@/lib/navigation';
 
 export default function Navbar() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileSubmenu, setOpenMobileSubmenu] = useState<number | null>(null);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    const [basePath] = href.split('#');
+    return pathname === basePath || pathname === href.split('#')[0];
+  };
+
+  const isMenuActive = (items: Array<{ href: string }>) => {
+    return items.some((item) => {
+      const [basePath] = item.href.split('#');
+      return pathname === basePath || pathname.startsWith(basePath + '/');
+    });
+  };
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -33,7 +47,11 @@ export default function Navbar() {
             {/* Home Button */}
             <Link
               href="/"
-              className="text-gray-700 hover:text-red-600 font-medium transition-colors"
+              className={`font-medium transition-colors ${
+                isActive('/') && pathname === '/'
+                  ? 'text-red-600'
+                  : 'text-gray-700 hover:text-red-600'
+              }`}
             >
               INICIO
             </Link>
@@ -41,6 +59,7 @@ export default function Navbar() {
             {mainNavigation.map((item, index) => {
               if ('items' in item) {
                 // Es un menú desplegable
+                const menuIsActive = isMenuActive(item.items);
                 return (
                   <div
                     key={index}
@@ -48,7 +67,13 @@ export default function Navbar() {
                     onMouseEnter={() => setOpenMenuIndex(index)}
                     onMouseLeave={() => setOpenMenuIndex(null)}
                   >
-                    <button className="text-gray-700 hover:text-red-600 font-medium">
+                    <button
+                      className={`font-medium transition-colors ${
+                        menuIsActive
+                          ? 'text-red-600'
+                          : 'text-gray-700 hover:text-red-600'
+                      }`}
+                    >
                       {item.label}
                     </button>
                     {openMenuIndex === index && (
@@ -57,7 +82,11 @@ export default function Navbar() {
                           <Link
                             key={subIndex}
                             href={subItem.href}
-                            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                            className={`block px-4 py-2 ${
+                              isActive(subItem.href)
+                                ? 'text-red-600 font-semibold bg-red-50'
+                                : 'text-gray-700 hover:bg-gray-100'
+                            }`}
                           >
                             {subItem.label}
                           </Link>
@@ -72,7 +101,11 @@ export default function Navbar() {
                   <Link
                     key={index}
                     href={item.href}
-                    className="text-gray-700 hover:text-red-600 font-medium"
+                    className={`font-medium transition-colors ${
+                      isActive(item.href)
+                        ? 'text-red-600'
+                        : 'text-gray-700 hover:text-red-600'
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -109,7 +142,11 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-600 rounded-md transition-colors"
+                className={`px-4 py-2 rounded-md transition-colors ${
+                  isActive('/') && pathname === '/'
+                    ? 'text-red-600 font-semibold bg-red-50'
+                    : 'text-gray-700 hover:bg-gray-100 hover:text-red-600'
+                }`}
               >
                 Inicio
               </Link>
@@ -117,11 +154,16 @@ export default function Navbar() {
               {mainNavigation.map((item, index) => {
                 if ('items' in item) {
                   // Menú desplegable en móvil
+                  const menuIsActive = isMenuActive(item.items);
                   return (
                     <div key={index}>
                       <button
                         onClick={() => setOpenMobileSubmenu(openMobileSubmenu === index ? null : index)}
-                        className="w-full flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-600 rounded-md transition-colors"
+                        className={`w-full flex items-center justify-between px-4 py-2 rounded-md transition-colors ${
+                          menuIsActive
+                            ? 'text-red-600 font-semibold bg-red-50'
+                            : 'text-gray-700 hover:bg-gray-100 hover:text-red-600'
+                        }`}
                       >
                         <span>{item.label}</span>
                         <svg
@@ -144,7 +186,11 @@ export default function Navbar() {
                                 setIsMobileMenuOpen(false);
                                 setOpenMobileSubmenu(null);
                               }}
-                              className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-red-600 rounded-md transition-colors"
+                              className={`block px-4 py-2 text-sm rounded-md transition-colors ${
+                                isActive(subItem.href)
+                                  ? 'text-red-600 font-semibold bg-red-50'
+                                  : 'text-gray-600 hover:bg-gray-100 hover:text-red-600'
+                              }`}
                             >
                               {subItem.label}
                             </Link>
