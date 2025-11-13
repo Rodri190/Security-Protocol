@@ -20,9 +20,9 @@ export default function Dashboard() {
       >
         <div className="text-center text-white z-10">
           <h1 className="text-5xl font-bold mb-8 leading-tight">
-            <span className="block">Análisis y Prevención</span>
-            <span className="block">de</span>
-            <span className="block">Riesgos Industriales</span>
+            <span className="block">ANÁLISIS Y PREVENCIÓN</span>
+            <span className="block">DE</span>
+            <span className="block">RIESGOS INDUSTRIALES</span>
           </h1>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function Dashboard() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-600">
+      <section className="py-16 bg-[#273c75]">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Prevención y Seguridad: Nuestra Prioridad

@@ -35,7 +35,7 @@ export default function Navbar() {
               href="/"
               className="text-gray-700 hover:text-red-600 font-medium transition-colors"
             >
-              Inicio
+              INICIO
             </Link>
             
             {mainNavigation.map((item, index) => {
