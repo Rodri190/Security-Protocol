@@ -13,14 +13,16 @@ export default function Dashboard() {
         className="relative h-[600px] flex items-center justify-center"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/Fondo.png")',
+            'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/Fondo.jpeg")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
+          backgroundPosition: 'center 50%',
         }}
       >
         <div className="text-center text-white z-10">
-          <h1 className="text-5xl font-bold mb-8">
-            Análisis y Prevención de Riesgos Industriales
+          <h1 className="text-5xl font-bold mb-8 leading-tight">
+            <span className="block">Análisis y Prevención</span>
+            <span className="block">de</span>
+            <span className="block">Riesgos Industriales</span>
           </h1>
         </div>
       </section>
@@ -99,25 +101,25 @@ export default function Dashboard() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-blue-600">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Prevención y Seguridad: Nuestra Prioridad
           </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
             Trabajamos constantemente para mejorar las condiciones de seguridad en todas las áreas.
             Tu bienestar es nuestro compromiso.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/norms/heat"
-              className="bg-white text-red-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-white text-yellow-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               Ver Normas de Seguridad
             </Link>
             <Link
               href="/statistics/total"
-              className="bg-red-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-800 transition-colors border-2 border-white"
+              className="bg-yellow-700 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-800 transition-colors border-2 border-white"
             >
               Consultar Estadísticas
             </Link>

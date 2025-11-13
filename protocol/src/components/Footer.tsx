@@ -46,17 +46,17 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/norms/heat" className="text-gray-400 hover:text-white transition-colors">
-                  Golpes de Calor
+                  ISO
                 </Link>
               </li>
               <li>
                 <Link href="/norms/falls" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Caídas
+                  OHSAS
                 </Link>
               </li>
               <li>
                 <Link href="/norms/cuts" className="text-gray-400 hover:text-white transition-colors">
-                  Prevención de Cortes
+                  NFPA
                 </Link>
               </li>
             </ul>
