@@ -147,12 +147,14 @@ export default function Dashboard() {
                 Sistema Integral de Prevención de Riesgos
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                El Sistema Integral de Prevención de Riesgos tiene como objetivo principal identificar, evaluar y controlar los posibles riesgos dentro de las instalaciones y procesos de la organización. Su implementación garantiza un entorno de trabajo seguro, protegiendo tanto a los colaboradores como a los recursos materiales y tecnológicos.
-
-Este sistema abarca todas las áreas operativas y administrativas, integrando procedimientos de seguridad, programas de capacitación, planes de emergencia y mecanismos de monitoreo constante. La gestión de riesgos se realiza de manera proactiva, asegurando la prevención antes que la reacción ante incidentes.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Asimismo, fomenta la cultura de seguridad entre los empleados, promoviendo la conciencia y responsabilidad en cada acción diaria. Gracias a su enfoque integral, permite cumplir con normativas locales e internacionales, reduciendo accidentes y optimizando la eficiencia operativa.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
               </p>
               <ul className="space-y-3">
                 <li className="flex items-start">
