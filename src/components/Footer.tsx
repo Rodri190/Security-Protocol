@@ -68,6 +68,7 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>📍 Cochabamba, Bolivia</li>
               <li>📧 seguridad@umss.edu.bo</li>
+              <li>📞 +591 4 4534000</li>
               <li className="pt-4">
                 <div className="flex space-x-4">
                   <a href="#" className="hover:text-white transition-colors">
