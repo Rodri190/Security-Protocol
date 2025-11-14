@@ -18,13 +18,27 @@ interface RowData {
   A: number | null;
   S: number | null;
   IR?: number;
+  manana?: number | null;
+  tarde?: number | null;
+  noche?: number | null;
 }
-
 export default function Page() {
-  const [data, setData] = useState<RowData[]>([
-    { zona: "Zona 1", A: null, S: null },
-    { zona: "Zona 2", A: null, S: null },
-  ]);
+ const [data, setData] = useState<RowData[]>([
+  { zona: "Zona de Trabajo", A: null, S: null, manana: null, tarde: null, noche: null },
+  { zona: "Construcción y Trabajos en Altura", A: null, S: null, manana: null, tarde: null, noche: null },
+  { zona: "Manipulación de Carga y Materiales Pesados", A: null, S: null },
+  { zona: "Manipulación de Productos Químicos", A: null, S: null },
+  { zona: "Soldadura y Corte de Metales", A: null, S: null },
+  { zona: "Fundición y Metalurgia", A: null, S: null },
+  { zona: "Riesgo Eléctrico", A: null, S: null },
+  { zona: "Altas Temperaturas Ambientales", A: null, S: null },
+  { zona: "Zona Biológica", A: null, S: null },
+  { zona: "Polvo o Partículas en Suspensión", A: null, S: null },
+  { zona: "Frío Extremo o Uso de Criogénicos", A: null, S: null },
+  { zona: "Espacios Confinados", A: null, S: null },
+  { zona: "Ruido Elevado", A: null, S: null },
+]);
+
 
   const dataWithIR = data.map((item) => ({
     ...item,
@@ -41,17 +55,20 @@ export default function Page() {
 
   const chartData = useMemo(() => {
     return dataWithIR.map((item) => {
-      let color = "#9ca3af"; // gris por defecto
-      if (item.IR === maxIR) color = "#dc2626"; // rojo (mayor)
+      let color = "#9ca3af";
+      if (item.IR === maxIR) color = "#dc2626"; 
       else if (item.IR === midIR && item.IR !== maxIR && item.IR !== minIR)
-        color = "#facc15"; // amarillo (intermedio)
-      else if (item.IR === minIR) color = "#22c55e"; // verde (menor)
+        color = "#facc15"; 
+      else if (item.IR === minIR) color = "#22c55e"; 
       return { zona: item.zona, IR: item.IR ?? 0, color };
     });
   }, [dataWithIR, maxIR, midIR, minIR]);
 
   const addRow = () =>
-    setData([...data, { zona: `Zona ${data.length + 1}`, A: null, S: null }]);
+    setData([
+      ...data,
+      { zona: `Zona ${data.length + 1}`, A: null, S: null, manana: null, tarde: null, noche: null },
+    ]);
   const removeRow = () => data.length > 1 && setData(data.slice(0, -1));
 
   const handleChange = (index: number, field: string, value: string) => {
@@ -60,7 +77,20 @@ export default function Page() {
     else if (field === "A" || field === "S") {
       newData[index][field as "A" | "S"] = value ? Number(value) : null;
     }
+    else if (field === "manana" || field === "tarde" || field === "noche") {
+      newData[index][field as 'manana' | 'tarde' | 'noche'] = value ? Number(value) : null;
+    }
     setData(newData);
+  };
+
+  const totalAccidents = data.reduce((sum, row) => sum + (row.A ?? 0), 0);
+  const sumaManana = data.reduce((sum, row) => sum + (row.manana ?? 0), 0);
+  const sumaTarde = data.reduce((sum, row) => sum + (row.tarde ?? 0), 0);
+  const sumaNoche = data.reduce((sum, row) => sum + (row.noche ?? 0), 0);
+
+  const porcentaje = (suma: number) => {
+    if (totalAccidents === 0) return 0;
+    return (suma * 100) / totalAccidents;
   };
 
   return (
@@ -76,7 +106,7 @@ export default function Page() {
           }}
         ></section>
 
-        <div className="bg-white rounded-lg shadow-md p-6 flex flex-col lg:flex-row gap-6 relative z-10">
+        <div className="bg-white rounded-lg shadow-md p-6 flex flex-col gap-6 relative z-10">
           {/* Tabla */}
           <div className="flex-1 overflow-x-auto">
             <p className="text-center text-black">
@@ -93,6 +123,9 @@ export default function Page() {
                   <th className="px-4 py-2 border">Zona de Trabajo</th>
                   <th className="px-4 py-2 border text-center">A</th>
                   <th className="px-4 py-2 border text-center">S</th>
+                  <th className="px-4 py-2 border text-center">Mañana</th>
+                  <th className="px-4 py-2 border text-center">Tarde</th>
+                  <th className="px-4 py-2 border text-center">Noche</th>
                   <th className="px-4 py-2 border text-center">IR</th>
                 </tr>
               </thead>
@@ -104,13 +137,8 @@ export default function Page() {
                   return (
                     <tr key={i} className="hover:bg-gray-50">
                       <td className="border px-4 py-2">{i + 1}</td>
-                      <td className="border px-4 py-2 text-center">
-                        <input
-                          type="text"
-                          value={item.zona}
-                          onChange={(e) => handleChange(i, "zona", e.target.value)}
-                          className="w-32 text-center border rounded border-gray-300 focus:ring focus:ring-blue-200"
-                        />
+                      <td className="border px-4 py-2 text-left whitespace-normal max-w-xs">
+                        {item.zona}
                       </td>
                       <td className="border px-4 py-2 text-center">
                         <input
@@ -128,6 +156,30 @@ export default function Page() {
                           className="w-20 text-center border rounded border-gray-300 focus:ring focus:ring-blue-200"
                         />
                       </td>
+                      <td className="border px-4 py-2 text-center">
+                        <input
+                          type="number"
+                          value={item.manana ?? ""}
+                          onChange={(e) => handleChange(i, "manana", e.target.value)}
+                          className="w-20 text-center border rounded border-gray-300 focus:ring focus:ring-blue-200"
+                        />
+                      </td>
+                      <td className="border px-4 py-2 text-center">
+                        <input
+                          type="number"
+                          value={item.tarde ?? ""}
+                          onChange={(e) => handleChange(i, "tarde", e.target.value)}
+                          className="w-20 text-center border rounded border-gray-300 focus:ring focus:ring-blue-200"
+                        />
+                      </td>
+                      <td className="border px-4 py-2 text-center">
+                        <input
+                          type="number"
+                          value={item.noche ?? ""}
+                          onChange={(e) => handleChange(i, "noche", e.target.value)}
+                          className="w-20 text-center border rounded border-gray-300 focus:ring focus:ring-blue-200"
+                        />
+                      </td>
                       <td
                         className="border px-4 py-2 text-center font-semibold"
                         style={{ color }}
@@ -137,6 +189,28 @@ export default function Page() {
                     </tr>
                   );
                 })}
+                {/* Fila resumen con totales por columna */}
+                <tr className="bg-gray-50">
+                  <td className="border px-4 py-2" />
+                  <td className="border px-4 py-2 font-semibold">Total de accidentes</td>
+                  <td className="border px-4 py-2 text-center font-semibold">{totalAccidents}</td>
+                  <td className="border px-4 py-2" />
+                  <td className="border px-4 py-2 text-center font-semibold">{sumaManana}</td>
+                  <td className="border px-4 py-2 text-center font-semibold">{sumaTarde}</td>
+                  <td className="border px-4 py-2 text-center font-semibold">{sumaNoche}</td>
+                  <td className="border px-4 py-2" />
+                </tr>
+                {/* Fila de porcentaje por turno - misma estructura/fila equivalente */}
+                <tr className="bg-white">
+                  <td className="border px-4 py-2" />
+                  <td className="border px-4 py-2 font-semibold">Porcentaje por turno</td>
+                  <td className="border px-4 py-2 text-center">{totalAccidents === 0 ? '0' : ''}</td>
+                  <td className="border px-4 py-2" />
+                  <td className="border px-4 py-2 text-center font-semibold">{(porcentaje(sumaManana)).toFixed(2)} %</td>
+                  <td className="border px-4 py-2 text-center font-semibold">{(porcentaje(sumaTarde)).toFixed(2)} %</td>
+                  <td className="border px-4 py-2 text-center font-semibold">{(porcentaje(sumaNoche)).toFixed(2)} %</td>
+                  <td className="border px-4 py-2" />
+                </tr>
               </tbody>
             </table>
 
