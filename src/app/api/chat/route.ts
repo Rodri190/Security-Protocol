@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
     // Obtener el mensaje del usuario y el historial
     const body = await request.json();
-    const { message, history } = body;
+    const { message, history, area, pageText } = body;
 
     // Validar que el mensaje no esté vacío
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
@@ -24,7 +24,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Generar respuesta usando Gemini AI
-    const response = await generateChatResponse(message, history || []);
+    const response = await generateChatResponse(message, history || [], {
+      area: area || null,
+      pageText: pageText || null,
+    });
 
     // Retornar la respuesta
     return NextResponse.json({ response });

@@ -22,14 +22,23 @@ ESTILO DE RESPUESTA:
 /**
  * Construye el prompt completo con contexto de conversación
  */
-function buildPrompt(userMessage: string, conversationHistory: Array<{ role: 'user' | 'bot'; text: string }>): string {
+function buildPrompt(
+  userMessage: string,
+  conversationHistory: Array<{ role: 'user' | 'bot'; text: string }>,
+  options?: { area?: string | null; pageText?: string | null }
+): string {
   const context = conversationHistory
     .map((msg) => `${msg.role === 'user' ? 'Usuario' : 'Asistente'}: ${msg.text}`)
     .join('\n');
 
+  const areaInfo = options?.area ? `Área/Sección: ${options.area}\n` : '';
+  const pageInfo = options?.pageText
+    ? `Contenido de página (resumen): ${options.pageText.slice(0, 1000)}\n`
+    : '';
+
   return `${SYSTEM_PROMPT}
 
-${context ? `CONVERSACIÓN PREVIA:\n${context}\n` : ''}
+${areaInfo}${pageInfo}${context ? `CONVERSACIÓN PREVIA:\n${context}\n` : ''}
 NUEVA PREGUNTA DEL USUARIO: ${userMessage}
 
 Responde de manera breve, clara y amigable:`;
@@ -70,11 +79,12 @@ async function callGeminiAPI(prompt: string): Promise<string> {
  */
 export async function generateChatResponse(
   userMessage: string,
-  conversationHistory: Array<{ role: 'user' | 'bot'; text: string }> = []
+  conversationHistory: Array<{ role: 'user' | 'bot'; text: string }> = [],
+  options?: { area?: string | null; pageText?: string | null }
 ): Promise<string> {
   try {
     console.log('🚀 Usando gemini-2.5-flash...');
-    const prompt = buildPrompt(userMessage, conversationHistory);
+    const prompt = buildPrompt(userMessage, conversationHistory, options);
     return await callGeminiAPI(prompt);
   } catch (error: unknown) {
     console.error('❌ Error al generar respuesta:', error);
