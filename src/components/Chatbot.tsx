@@ -1,6 +1,7 @@
-'use client';
+ 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import AnimatedBot from './AnimatedBot';
 
 interface Message {
@@ -19,6 +20,9 @@ export default function Chatbot() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const [areaName, setAreaName] = useState<string | null>(null);
+  const [pageText, setPageText] = useState<string | null>(null);
 
   // Auto-scroll al último mensaje
   const scrollToBottom = () => {
@@ -28,6 +32,34 @@ export default function Chatbot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Detectar el área a partir de la ruta y leer texto de la página principal
+  useEffect(() => {
+    if (!pathname) return;
+
+    // Mapear rutas a nombres legibles
+    const routeToName: Record<string, string> = {
+      '/': 'Inicio / Dashboard',
+      '/analysis/type': 'Análisis por tipo',
+      '/norms': 'Normas',
+      '/norms/cuts': 'Normas - Cortes',
+      '/norms/general-risks': 'Normas - Riesgos Generales',
+      '/norms/specific-zones': 'Normas - Zonas Específicas',
+      '/vestimenta': 'Vestimenta y EPP',
+    };
+
+    const area = routeToName[pathname] || pathname.replace('/', '') || 'Página';
+    setAreaName(area);
+
+    // Intentar leer el contenido principal de la página para contexto
+    try {
+      const main = document.querySelector('main');
+      const text = main ? (main.textContent || '').trim() : '';
+      setPageText(text ? text.slice(0, 2000) : null);
+    } catch (e) {
+      setPageText(null);
+    }
+  }, [pathname]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -57,6 +89,8 @@ export default function Chatbot() {
         body: JSON.stringify({
           message: userMessage,
           history: messages.slice(-6), // Enviar últimos 6 mensajes para contexto
+          area: areaName,
+          pageText: pageText,
         }),
       });
 
@@ -121,7 +155,7 @@ export default function Chatbot() {
                     <h3 className="text-white font-bold">Asistente de Seguridad</h3>
                     <p className="text-red-100 text-xs flex items-center">
                       <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                      disponible
+                      disponible - {areaName ?? 'General'}
                     </p>
                   </div>
                 </div>

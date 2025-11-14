@@ -1,6 +1,7 @@
 import './globals.css';
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import Chatbot from '../components/Chatbot';
 
 export const metadata: Metadata = {
   title: 'Análisis y Prevención de Riesgos Industriales',
@@ -16,7 +17,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Chatbot />
+      </body>
     </html>
   );
 }
